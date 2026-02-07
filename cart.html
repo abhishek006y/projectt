@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart</title>
+<style>
+body{font-family:Inter;background:#f5f6fa}
+.container{max-width:800px;margin:40px auto}
+.item{background:#fff;padding:15px;margin-bottom:10px;border-radius:12px}
+button{background:#4f46e5;color:#fff;border:none;padding:10px 16px;border-radius:20px}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Cart</h2>
+  <div id="cart"></div>
+  <h3 id="total"></h3>
+  <a href="checkout.html"><button>Checkout</button></a>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart"))||[];
+let div = document.getElementById("cart");
+let total=0;
+
+cart.forEach(i=>{
+  total+=i.price*i.qty;
+  div.innerHTML+=`
+    <div class="item">${i.name} × ${i.qty} — ₹${i.price*i.qty}</div>
+  `;
+});
+
+document.getElementById("total").innerText="Total: ₹"+total;
+localStorage.setItem("orderTotal",total);
+localStorage.setItem("orderSummary",JSON.stringify(cart));
+</script>
+
+</body>
+</html>
