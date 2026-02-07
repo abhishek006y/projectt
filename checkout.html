@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Checkout</title></head>
+<body style="font-family:Inter;text-align:center;padding:80px">
+<h2>Confirm Order</h2>
+<button onclick="placeOrder()">Place Order</button>
+
+<script>
+function placeOrder(){
+  const orderId="ORD"+Math.floor(Math.random()*100000);
+  localStorage.setItem("orderId",orderId);
+  location.href="success.html";
+}
+</script>
+</body>
+</html>
