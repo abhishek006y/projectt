@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Profile</title>
+<style>
+body{font-family:Inter;background:#f5f6fa}
+.container{max-width:900px;margin:40px auto}
+.card{background:#fff;padding:20px;border-radius:16px;margin-bottom:20px}
+.order{border:1px solid #eee;padding:15px;border-radius:12px;margin-top:10px}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+<h2>My Profile</h2>
+<p id="uname"></p>
+<p id="uemail"></p>
+<button onclick="logout()">Logout</button>
+</div>
+
+<div class="card">
+<h2>Order History</h2>
+<div id="orders"></div>
+</div>
+
+</div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("currentUser"))||{};
+document.getElementById("uname").innerText="Name: "+(user.name||"User");
+document.getElementById("uemail").innerText="Email: "+(user.email||"-");
+
+const ordersDiv=document.getElementById("orders");
+const orders=JSON.parse(localStorage.getItem("orders"))||[];
+
+if(!orders.length){
+  ordersDiv.innerHTML="No orders yet.";
+}
+
+orders.reverse().forEach(o=>{
+  let html=`<div class="order">
+    <strong>${o.orderId}</strong> (${o.date})<br>`;
+  o.items.forEach(i=>{
+    html+=`${i.name} × ${i.qty}<br>`;
+  });
+  html+=`<b>Total: ₹${o.total}</b></div>`;
+  ordersDiv.innerHTML+=html;
+});
+
+function logout(){
+  localStorage.clear();
+  location.href="login.html";
+}
+</script>
+
+</body>
+</html>
