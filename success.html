@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>Success</title></head>
+<body style="font-family:Inter;text-align:center;padding:80px">
+
+<h2>Order Placed Successfully 🎉</h2>
+<p id="oid"></p>
+
+<script>
+const orderId = localStorage.getItem("orderId");
+const items = JSON.parse(localStorage.getItem("orderSummary")) || [];
+const total = localStorage.getItem("orderTotal");
+
+let orders = JSON.parse(localStorage.getItem("orders"))||[];
+
+orders.push({
+  orderId,
+  items,
+  total,
+  date:new Date().toLocaleString(),
+  status:"Placed"
+});
+
+localStorage.setItem("orders",JSON.stringify(orders));
+localStorage.removeItem("cart");
+
+document.getElementById("oid").innerText="Order ID: "+orderId;
+</script>
+
+<a href="profile.html">Go to Profile</a>
+
+</body>
+</html>
