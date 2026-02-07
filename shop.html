@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop</title>
+<style>
+body{font-family:Inter;background:#f5f6fa}
+.products{max-width:1000px;margin:40px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:#fff;padding:15px;border-radius:16px}
+button{background:#4f46e5;color:#fff;border:none;padding:10px;border-radius:20px;width:100%}
+</style>
+</head>
+
+<body>
+
+<div class="products">
+  <div class="card">
+    <h4>Casual Shirt</h4>
+    <p>₹1299</p>
+    <button onclick="addToCart('Casual Shirt',1299)">Add</button>
+  </div>
+
+  <div class="card">
+    <h4>Smart Watch</h4>
+    <p>₹3999</p>
+    <button onclick="addToCart('Smart Watch',3999)">Add</button>
+  </div>
+</div>
+
+<script>
+function addToCart(name,price){
+  let cart = JSON.parse(localStorage.getItem("cart"))||[];
+  let item = cart.find(i=>i.name===name);
+  if(item){item.qty++}
+  else{cart.push({name,price,qty:1})}
+  localStorage.setItem("cart",JSON.stringify(cart));
+  alert("Added to cart");
+}
+</script>
+
+</body>
+</html>
